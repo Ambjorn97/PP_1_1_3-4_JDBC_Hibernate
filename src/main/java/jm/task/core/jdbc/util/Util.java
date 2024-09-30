@@ -6,19 +6,32 @@ import java.sql.SQLException;
 
 public class Util {
     // реализуйте настройку соеденения с БД
-    private final String URL = "jdbc:mysql://localhost:3306/";
-    private final String USER = "root";
-    private final String PASSWORD = "springcourse";
-    private Connection connection;
-    public Util(){
-        try{
+    private static final String URL = "jdbc:mysql://localhost:3306/mydb";
+    private static final String USER = "root";
+    private static final String PASSWORD = "springcourse";
+    private static Connection connection;
+
+    static {
+        try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println("Failed to connect to database");
         }
     }
 
-    public Connection getConnection() {
+    public Util() {
+
+    }
+
+    public static Connection getConnection() {
         return connection;
+    }
+
+    public static void closeConnection() {
+        try {
+            connection.close();
+        } catch (SQLException e) {
+            System.out.println("Failed to close connection");
+        }
     }
 }
