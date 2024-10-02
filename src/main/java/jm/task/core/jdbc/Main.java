@@ -12,10 +12,16 @@ public class Main {
         // реализуйте алгоритм здесь
         UserServiceImpl userService = new UserServiceImpl();
         userService.createUsersTable();
-        userService.saveUser("Agatha", "Stone", (byte) 45);
-        userService.saveUser("Nikita", "Petrusenko", (byte) 26);
-        userService.saveUser("Tregul", "Zaurov", (byte) 30);
-        userService.saveUser("Neil", "Alishev", (byte) 29);
+        try {
+
+            userService.saveUser("Agatha", "Stone", (byte) 45);
+            userService.saveUser("Nikita", "Petrusenko", (byte) 26);
+            userService.saveUser("Tregul", "Zaurov", (byte) 30);
+            userService.saveUser("Neil", "Alishev", (byte) 29);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         List<User> users = userService.getAllUsers();
         users.forEach(System.out::println);
         userService.cleanUsersTable();
